@@ -9,12 +9,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
+            --brand-blue: #0000ff;
             --brand-gradient: linear-gradient(135deg, #0000ff 0%, #06b6d4 100%);
             --dark-bg: #0f172a;
-            --card-blue: #1e3a8a;
             --accent-teal: #06b6d4;
             --text-light: #f8fafc;
             --glass: rgba(255, 255, 255, 0.05);
+            --nav-bg: rgba(15, 23, 42, 0.9);
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -28,28 +29,47 @@
             line-height: 1.6;
         }
 
-        h1, h2, h3, .step-number {
+        h1, h2, h3, .step-number, .nav-link, .footer-head {
             font-family: 'Orbitron', sans-serif;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        /* --- HERO SECTION --- */
-        header {
-            padding: 60px 20px;
-            text-align: center;
-            background: radial-gradient(circle at top, #1e3a8a 0%, #0f172a 70%);
+        /* --- OFFICIAL NAV --- */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--nav-bg);
+            backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(6, 182, 212, 0.2);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .logo-text { color: var(--accent-teal); font-size: 0.9rem; font-weight: 700; margin-bottom: 10px; display: block; }
-        h1 { font-size: 2rem; margin: 0; background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-logo img {
+            height: 40px;
+            display: block;
+        }
 
-        /* --- SETUP CONTAINER --- */
+        .nav-links { display: none; } /* Mobile first: hidden by default */
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 80px 20px 40px;
+            text-align: center;
+            background: radial-gradient(circle at center, #1e3a8a 0%, #0f172a 100%);
+        }
+
+        h1 { font-size: 1.8rem; margin: 0; background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* --- CONTENT --- */
         .container {
             max-width: 500px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 20px;
         }
 
         .step-card {
@@ -60,12 +80,6 @@
             margin-bottom: 30px;
             position: relative;
             backdrop-filter: blur(10px);
-            transition: transform 0.3s ease;
-        }
-
-        .step-card:hover {
-            border-color: var(--accent-teal);
-            transform: translateY(-5px);
         }
 
         .step-number {
@@ -83,96 +97,111 @@
             box-shadow: 0 0 15px rgba(0, 0, 255, 0.5);
         }
 
-        h3 { margin-top: 10px; color: var(--accent-teal); font-size: 1.2rem; }
+        h3 { margin-top: 10px; color: var(--accent-teal); font-size: 1.1rem; }
         
-        .status-pill {
-            display: inline-block;
-            padding: 4px 12px;
-            background: rgba(6, 182, 212, 0.1);
-            border: 1px solid var(--accent-teal);
-            border-radius: 50px;
-            font-size: 0.7rem;
-            margin-bottom: 10px;
-            color: var(--accent-teal);
-        }
-
-        /* --- CTA BUTTONS --- */
         .btn {
             display: block;
             text-align: center;
-            padding: 15px;
+            padding: 14px;
             background: var(--brand-gradient);
             color: white;
             text-decoration: none;
-            border-radius: 12px;
+            border-radius: 8px;
             font-weight: 700;
-            margin-top: 20px;
+            margin-top: 15px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 255, 0.3);
+            font-size: 0.75rem;
         }
 
-        /* --- WARNING BOX --- */
         .warning {
             background: rgba(239, 68, 68, 0.1);
             border: 1px solid #ef4444;
             padding: 15px;
             border-radius: 12px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             margin-top: 15px;
         }
 
+        /* --- OFFICIAL FOOTER --- */
         footer {
+            background: #070b14;
+            padding: 60px 20px 30px;
+            border-top: 2px solid var(--brand-blue);
             text-align: center;
-            padding: 40px 20px;
-            font-size: 0.8rem;
-            color: #64748b;
+        }
+
+        .footer-head { color: var(--accent-teal); font-size: 0.9rem; margin-bottom: 20px; display: block; }
+        .footer-links { list-style: none; padding: 0; margin-bottom: 30px; }
+        .footer-links li { margin: 10px 0; font-size: 0.85rem; color: #94a3b8; }
+        
+        .copyright {
+            font-size: 0.75rem;
+            color: #475569;
+            margin-top: 40px;
             border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 20px;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <span class="logo-text">EZASTAP X MAYTECK C.S.</span>
-        <h1>NFC Configuration</h1>
-        <p style="color: #94a3b8; font-size: 0.9rem;">Program your keychain in seconds.</p>
-    </header>
+    <nav>
+        <div class="nav-logo">
+            <img src="MayteckCS_logo.jpg" alt="Mayteck C.S. Logo">
+        </div>
+        <div class="nav-contact">
+            <a href="tel:+17140000000" style="color: var(--accent-teal); text-decoration: none; font-weight: bold; font-size: 0.8rem;">CONTACT US</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>NFC CONFIGURATION</h1>
+        <p style="color: #94a3b8; font-size: 0.9rem;">EZasTap Setup Guide</p>
+    </section>
 
     <div class="container">
-        
         <div class="step-card">
             <div class="step-number">1</div>
-            <span class="status-pill">REQUIRED APP</span>
             <h3>Install NFC Tools</h3>
-            <p>Download the professional standard for NFC management. It's free and compatible with all EZasTap products.</p>
-            <a href="https://apps.apple.com/app/nfc-tools/id1252962749" class="btn" style="margin-bottom: 10px;">Download for iOS</a>
-            <a href="https://play.google.com/store/apps/details?id=com.wakdev.wdnfc" class="btn" style="background: #334155;">Download for Android</a>
+            <p>Download the standard app for EZasTap products.</p>
+            <a href="#" class="btn">Download iOS</a>
+            <a href="#" class="btn" style="background: #334155;">Download Android</a>
         </div>
 
         <div class="step-card">
             <div class="step-number">2</div>
-            <span class="status-pill">WRITE DATA</span>
             <h3>Program Chip</h3>
-            <p>Open the app, select <strong>Write</strong>, then <strong>Add a record</strong>. Choose "URL" to link your social media or digital business card.</p>
-            <p style="font-size: 0.85rem; color: #94a3b8;">Tap "Write" and hold your EZasTap keychain to the top-back of your phone.</p>
+            <p>Select <strong>Write</strong> > <strong>Add Record</strong>. Choose your link, then tap the keychain to the top of your phone.</p>
         </div>
 
         <div class="step-card">
             <div class="step-number">3</div>
-            <span class="status-pill">FINAL STEP</span>
-            <h3>Lock (Optional)</h3>
-            <p>To prevent others from changing your link, go to <strong>Other</strong> > <strong>Lock Tag</strong>.</p>
+            <h3>Lock (Permanent)</h3>
+            <p>Go to <strong>Other</strong> > <strong>Lock Tag</strong> to make your data read-only.</p>
             <div class="warning">
-                <strong>CRITICAL:</strong> Locking is permanent. Once locked, the data on your EZasTap keychain can NEVER be changed again.
+                <strong>WARNING:</strong> Locking is permanent. The keychain cannot be reprogrammed after this step.
             </div>
         </div>
-
     </div>
 
     <footer>
-        &copy; 2026 Mayteck C.S. | Powered by EZasTap.com<br>
-        Huntington Beach, California
+        <span class="footer-head">MAYTECK C.S. IT & AI SOLUTIONS</span>
+        <ul class="footer-links">
+            <li>Managed IT Services</li>
+            <li>Digital Marketing & SEO</li>
+            <li>Cybersecurity Solutions</li>
+            <li>Custom Web Development</li>
+        </ul>
+        
+        <div style="margin-top: 20px;">
+            <p style="font-size: 0.85rem;">Huntington Beach, CA</p>
+            <p style="font-size: 0.85rem; color: var(--accent-teal);">info@mayteckcs.com</p>
+        </div>
+
+        <div class="copyright">
+            &copy; 2026 Mayteck C.S. All Rights Reserved. <br>
+            Optimized for Local SEO in Orange County.
+        </div>
     </footer>
 
 </body>
